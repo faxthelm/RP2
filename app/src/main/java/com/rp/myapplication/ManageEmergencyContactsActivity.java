@@ -24,7 +24,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 
-public class EmergencyContactsActivity extends AppCompatActivity {
+public class ManageEmergencyContactsActivity extends AppCompatActivity {
 
     private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     private static final int PICK_CONTACT = 2;
@@ -38,7 +38,7 @@ public class EmergencyContactsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_emergency_contacts);
+        setContentView(R.layout.activity_manage_emergency_contacts);
 
         emergencyContactsHashMap = new HashMap<String, String>();
 
