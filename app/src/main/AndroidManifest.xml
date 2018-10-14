@@ -29,7 +29,6 @@
         <activity android:name=".ForgotPassword" />
         <activity android:name=".SignUp" />
         <activity android:name=".ManageEmergencyContactsActivity"></activity>
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
@@ -54,6 +53,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".HelpButton"></activity>
+        <activity android:name=".OficialInformation" />
+        <activity android:name=".ONGInformation"></activity>
     </application>
 
 </manifest>
