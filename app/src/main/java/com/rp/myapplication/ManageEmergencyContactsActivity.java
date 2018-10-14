@@ -20,9 +20,10 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.rp.myapplication.model.Contact;
 
 import java.lang.reflect.Type;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class ManageEmergencyContactsActivity extends AppCompatActivity {
 
@@ -30,7 +31,7 @@ public class ManageEmergencyContactsActivity extends AppCompatActivity {
     private static final int PICK_CONTACT = 2;
     private static final String EMERGENCY_CONTACTS_LIST = "emergencyContactsList";
 
-    private HashMap<String,String> emergencyContactsHashMap;
+    private ArrayList<Contact> emergencyContactsArrayList;
 
     private SharedPreferences sharedPref;
     private SharedPreferences.Editor editor;
@@ -40,13 +41,10 @@ public class ManageEmergencyContactsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_emergency_contacts);
 
-        emergencyContactsHashMap = new HashMap<String, String>();
-
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         editor = sharedPref.edit();
 
-        emergencyContactsHashMap = getHashMap();
-        loadContactsListView();
+        getArrayList();
 
         //Checa se temos a permissão de acessar os contatos
         if (ContextCompat.checkSelfPermission(this,
@@ -63,10 +61,10 @@ public class ManageEmergencyContactsActivity extends AppCompatActivity {
             }
         }
 
-         Button registerEmergencyContactButton = (Button) findViewById(R.id.registerEmergencyContactButton);
-         ListView emergencyContactsList = (ListView) findViewById(R.id.emergencyContactsList);
+        Button registerEmergencyContactButton = (Button) findViewById(R.id.register_emergency_contact_button);
+        ListView emergencyContactsList = (ListView) findViewById(R.id.emergencyContactsList);
 
-         registerEmergencyContactButton.setOnClickListener(new View.OnClickListener() {
+        registerEmergencyContactButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ContentResolver resolver = getContentResolver();
@@ -75,8 +73,8 @@ public class ManageEmergencyContactsActivity extends AppCompatActivity {
                 startActivityForResult(intent, PICK_CONTACT);
             }
         });
-
     }
+
     protected void onActivityResult(int reqCode, int resultCode, Intent data){
         super.onActivityResult(reqCode, resultCode, data);
         if(resultCode != RESULT_CANCELED && data != null) {
@@ -110,8 +108,8 @@ public class ManageEmergencyContactsActivity extends AppCompatActivity {
                         else if (!checkIfNewPhone(number)) {
                             displayMessage(ErrorMessages.contactAlreadyExists);
                         } else {
-                            emergencyContactsHashMap.put(number, name);
-                            saveHashMap();
+                            emergencyContactsArrayList.add(new Contact(name, number));
+                            saveArrayList();
                         }
                         number = "";
                         name = "";
@@ -125,8 +123,9 @@ public class ManageEmergencyContactsActivity extends AppCompatActivity {
     }
 
     protected boolean checkIfNewPhone(String number){
-        if(!emergencyContactsHashMap.isEmpty() && emergencyContactsHashMap.get(number)== null) {
-            return false;
+        for(Contact contact : emergencyContactsArrayList){
+            if(contact.getPhoneNumber().equals(number))
+                return false;
         }
         return true;
     }
@@ -139,21 +138,27 @@ public class ManageEmergencyContactsActivity extends AppCompatActivity {
     }
 
 
-    public void saveHashMap(){
+    public void saveArrayList(){
         Gson gson = new Gson();
-        String json = gson.toJson(emergencyContactsHashMap);
+        String json = gson.toJson(emergencyContactsArrayList);
         editor.putString(EMERGENCY_CONTACTS_LIST, json);
         editor.apply();
     }
 
-    public HashMap<String, String> getHashMap(){
+    public void getArrayList(){
         Gson gson = new Gson();
         String json = sharedPref.getString(EMERGENCY_CONTACTS_LIST, null);
-        Type type = new TypeToken<HashMap<String,String>>() {}.getType();
-        return gson.fromJson(json, type);
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        if (gson.fromJson(json, type) == null){
+            emergencyContactsArrayList = new ArrayList<Contact>();
+        } else {
+            emergencyContactsArrayList = gson.fromJson(json, type);
+            updateContactsListView();
+        }
     }
 
-    public void loadContactsListView(){
+    public void updateContactsListView(){
+
 
     }
 }
