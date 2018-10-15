@@ -3,7 +3,7 @@ package com.rp.myapplication;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class HelpButton extends AppCompatActivity {
+public class HelpButtonActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -24,12 +24,16 @@ import com.rp.myapplication.model.Contact;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ManageEmergencyContactsActivity extends AppCompatActivity {
 
     private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     private static final int PICK_CONTACT = 2;
     private static final String EMERGENCY_CONTACTS_LIST = "emergencyContactsList";
+
+    private ListView emergencyContactsListView;
+    private AdapterContact adapterContact;
 
     private ArrayList<Contact> emergencyContactsArrayList;
 
@@ -46,7 +50,7 @@ public class ManageEmergencyContactsActivity extends AppCompatActivity {
 
         getArrayList();
 
-        //Checa se temos a permissão de acessar os contatos
+        //TODO Rechecar se temos a permissão de acessar os contatos
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_CONTACTS)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -62,7 +66,7 @@ public class ManageEmergencyContactsActivity extends AppCompatActivity {
         }
 
         Button registerEmergencyContactButton = (Button) findViewById(R.id.register_emergency_contact_button);
-        ListView emergencyContactsList = (ListView) findViewById(R.id.emergencyContactsList);
+
 
         registerEmergencyContactButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +114,7 @@ public class ManageEmergencyContactsActivity extends AppCompatActivity {
                         } else {
                             emergencyContactsArrayList.add(new Contact(name, number));
                             saveArrayList();
+                            updateContactsListView();
                         }
                         number = "";
                         name = "";
@@ -148,7 +153,8 @@ public class ManageEmergencyContactsActivity extends AppCompatActivity {
     public void getArrayList(){
         Gson gson = new Gson();
         String json = sharedPref.getString(EMERGENCY_CONTACTS_LIST, null);
-        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+
+        Type type = new TypeToken<ArrayList<Contact>>(){}.getType();
         if (gson.fromJson(json, type) == null){
             emergencyContactsArrayList = new ArrayList<Contact>();
         } else {
@@ -158,7 +164,8 @@ public class ManageEmergencyContactsActivity extends AppCompatActivity {
     }
 
     public void updateContactsListView(){
-
-
+        emergencyContactsListView = (ListView) findViewById(R.id.emergency_contacts_list);
+        adapterContact = new AdapterContact(this,emergencyContactsArrayList);
+        emergencyContactsListView.setAdapter(adapterContact);
     }
 }

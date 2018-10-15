@@ -52,7 +52,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".HelpButton"></activity>
+        <activity android:name=".HelpButtonActivity"></activity>
         <activity android:name=".OficialInformation" />
         <activity android:name=".ONGInformation"></activity>
     </application>
