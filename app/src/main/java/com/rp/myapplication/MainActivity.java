@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Check already session , if ok-> DashBoard
         if(auth.getCurrentUser() != null)
-            startActivity(new Intent(MainActivity.this, ManageEmergencyContactsActivity.class));
+            startActivity(new Intent(MainActivity.this, ONGInformation.class));
     }
 
     @Override

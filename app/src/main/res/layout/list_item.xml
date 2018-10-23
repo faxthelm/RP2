@@ -27,6 +27,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_marginEnd="15dp"
-        android:background="@null" />
+        android:background="@null"
+        android:onClick="onContactRemoved"/>
 
 </RelativeLayout>

@@ -8,10 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.rp.myapplication.R;
+
 import com.rp.myapplication.model.Contact;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ import java.util.List;
 public class AdapterContact extends ArrayAdapter<Contact> {
 
     private Context mContext;
-    private List<Contact> contactList = new ArrayList<>();
+    private List<Contact> contactList;
 
     public AdapterContact(@NonNull Context context, ArrayList<Contact> list) {
         super(context, 0 , list);
@@ -30,7 +29,7 @@ public class AdapterContact extends ArrayAdapter<Contact> {
 
     @NonNull
     @Override
-    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable final View convertView, @NonNull ViewGroup parent) {
         View listItem = convertView;
         if(listItem == null)
             listItem = LayoutInflater.from(mContext).inflate(R.layout.list_item, parent,false);
@@ -51,6 +50,9 @@ public class AdapterContact extends ArrayAdapter<Contact> {
             public void onClick(View v) {
                 contactList.remove(position);
                 notifyDataSetChanged();
+                if(mContext instanceof ManageEmergencyContactsActivity){
+                    ((ManageEmergencyContactsActivity)mContext).saveArrayList();
+                }
             }
         });
 

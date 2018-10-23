@@ -17,7 +17,6 @@
         android:inputType="textMultiLine"
         android:text="Contatos Oficiais"
         android:textAlignment="center"
-        android:textColor="@color/com_facebook_likeboxcountview_text_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
