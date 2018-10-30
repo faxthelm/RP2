@@ -37,7 +37,6 @@
         <activity android:name=".HelpButtonActivity" />
         <activity android:name=".OficialInformation" />
         <activity android:name=".ONGInformation" />
-        <activity android:name=".Menu"></activity>
     </application>
 
 </manifest>
