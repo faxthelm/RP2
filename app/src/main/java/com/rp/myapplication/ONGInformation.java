@@ -3,6 +3,7 @@ package com.rp.myapplication;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.TextView;
 
 public class ONGInformation extends AppCompatActivity {
@@ -11,8 +12,11 @@ public class ONGInformation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onginformation);
+        
+
         TextView contatosOng = (TextView)findViewById(R.id.contatosOng);
-        contatosOng.setText("Contatos ONG");
+        contatosOng.setText(Html.fromHtml("<u>Contatos ONG</u>"));
+        contatosOng.setTextSize(20f);
 
         TextView agenciaPatricia = (TextView)findViewById(R.id.agenciaPatricia);
         agenciaPatricia.setText("\nProjeto: A Agência Patrícia Galvão é uma iniciativa do Instituto Patrícia Galvão – " +
