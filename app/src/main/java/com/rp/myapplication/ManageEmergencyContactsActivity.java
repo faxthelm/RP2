@@ -56,15 +56,9 @@ public class ManageEmergencyContactsActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_CONTACTS)
                 != PackageManager.PERMISSION_GRANTED) {
-
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.READ_CONTACTS)) {
-
-            } else {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.READ_CONTACTS},
                         MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-            }
         }
 
         Button registerEmergencyContactButton = (Button) findViewById(R.id.register_emergency_contact_button);
@@ -145,7 +139,6 @@ public class ManageEmergencyContactsActivity extends AppCompatActivity {
     }
 
     public void onContactRemoved(View view){
-        System.out.println("testes");
         if(view.getId() == R.id.remove_contact){
             saveArrayList();
         }
@@ -178,21 +171,23 @@ public class ManageEmergencyContactsActivity extends AppCompatActivity {
         emergencyContactsListView.setAdapter(adapterContact);
     }
 
-    public void sendSms(){
+    public void sendSms() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.SEND_SMS},
+                    MY_PERMISSIONS_REQUEST_SEND_SMS);
+        }
         SmsManager smsManager = SmsManager.getDefault();
-        for(Contact contact : emergencyContactsArrayList){
-            System.out.println("Sending SMS to: " + contact.getPhoneNumber());
-            smsManager.sendTextMessage(contact.getPhoneNumber(), null, "Estou em perigo! Você está cadastrado nos meus contatos de segurança, me encontro na localização:", null, null);
-            if (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.SEND_SMS)
-                    != PackageManager.PERMISSION_GRANTED) {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                        Manifest.permission.SEND_SMS)) {
-                } else {
-                    ActivityCompat.requestPermissions(this,
-                            new String[]{Manifest.permission.SEND_SMS},
-                            MY_PERMISSIONS_REQUEST_SEND_SMS);
-                }
+        for (Contact contact : emergencyContactsArrayList) {
+            try {
+                smsManager.sendTextMessage(contact.getPhoneNumber(), null, "Estou em perigo! Você está cadastrado nos meus contatos de segurança, me encontro na localização:", null, null);
+                Toast.makeText(getApplicationContext(), "Pedido de ajuda enviado!", Toast.LENGTH_LONG).show();
+            }catch (Exception e){
+                Toast.makeText(getApplicationContext(),
+                        "Erro ao enviar o SMS!",
+                        Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -205,7 +200,7 @@ public class ManageEmergencyContactsActivity extends AppCompatActivity {
                   sendSms();
                 } else {
                     Toast.makeText(getApplicationContext(),
-                            "Erro ao enviar os SMS.", Toast.LENGTH_LONG).show();
+                            "Habilite a permissão de SMS para o aplicativo nas configurações do aplicativo.", Toast.LENGTH_LONG).show();
                     return;
                 }
             }

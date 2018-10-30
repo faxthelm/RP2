@@ -25,14 +25,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DashBoard" />
-        <activity android:name=".ForgotPassword" />
-        <activity android:name=".SignUp" />
         <activity android:name=".ManageEmergencyContactsActivity"></activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <activity android:name=".HelpButtonActivity"></activity>
+
         <activity android:name=".OficialInformation" />
         <activity android:name=".ONGInformation"></activity>
     </application>
