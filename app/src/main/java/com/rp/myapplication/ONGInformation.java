@@ -10,6 +10,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class ONGInformation extends AppCompatActivity {
 
     @Override
@@ -39,6 +41,21 @@ public class ONGInformation extends AppCompatActivity {
         TextView tituloAssociacao = (TextView)findViewById(R.id.tituloAssociacao);
         tituloAssociacao.setText("Associação de Mulheres da Zona Leste");
 
+        TextView tituloBemMeQuer = (TextView)findViewById(R.id.tituloBemMeQuer);
+        tituloBemMeQuer.setText("Bem Me Quer");
+        TextView bemMeQuer = (TextView)findViewById(R.id.bemMeQuer);
+        bemMeQuer.setText("\nProjeto: Núcleo de atenção integral à mulher em situação de violência sexual, Hospital Pérola Byington\n" +
+                "E-mail: crsm-ouvidoria@saude.sp.gov.br\n" +
+                "Telefone: 3248-8000\n\n" +
+                "Endereço: Avenida Brig. Luís Antônio, 683 Bela Vista – São Paulo\n");
+
+        TextView tituloCasaBrasilandia = (TextView)findViewById(R.id.tituloCasaBrasilandia);
+        tituloCasaBrasilandia.setText("Casa Brasilândia");
+        TextView casaBrasilandia = (TextView) findViewById(R.id.casaBrasilandia);
+        casaBrasilandia.setText("\nProjeto: Oferecer assistência psicossocial e jurídica à mulher em situação de violência\n" +
+                "E-mail: casabrasilandia@ig.com.br\n" +
+                "Telefone: (0xx11) 3983.4294; 3984.9816\n\n" +
+                "Endereço: R. Silvio Bueno Peruche, nº 538 – Vila Brasilândia\n");
 
     }
 
