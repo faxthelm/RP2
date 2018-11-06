@@ -51,6 +51,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (item.getItemId()) {
             case R.id.home:
                 return true;
+            case R.id.oficial:
+                Intent intent2 = new Intent(this, OficialInformation.class);
+                startActivity(intent2);
+                return true;
             case R.id.ong:
                 Intent intent = new Intent(this, ONGInformation.class);
                 startActivity(intent);
