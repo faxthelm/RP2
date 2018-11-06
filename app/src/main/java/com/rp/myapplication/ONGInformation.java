@@ -35,7 +35,7 @@ public class ONGInformation extends AppCompatActivity {
         tituloPatricia.setText("Agência Patrícia Galvão");
 
         TextView agenciaAssociacao = (TextView)findViewById(R.id.agenciaAssociacao);
-        agenciaAssociacao.setText("\nProjeto: Projeto: Amzol atende mulheres vítimas de violência\n" +
+        agenciaAssociacao.setText("\nProjeto: Projeto: Amzol atende mulheres vítimas de violência\n\n" +
                 "E-mail: amzol@ig.com.br\n\n" +
                 "Endereço: Endereço: 669 – R. Pedro Soares de Andrade, 619 – Vila Rosaria, São Paulo – SP, 08021-040\n\n");
         TextView tituloAssociacao = (TextView)findViewById(R.id.tituloAssociacao);
@@ -44,7 +44,7 @@ public class ONGInformation extends AppCompatActivity {
         TextView tituloBemMeQuer = (TextView)findViewById(R.id.tituloBemMeQuer);
         tituloBemMeQuer.setText("Bem Me Quer");
         TextView bemMeQuer = (TextView)findViewById(R.id.bemMeQuer);
-        bemMeQuer.setText("\nProjeto: Núcleo de atenção integral à mulher em situação de violência sexual, Hospital Pérola Byington\n" +
+        bemMeQuer.setText("\nProjeto: Núcleo de atenção integral à mulher em situação de violência sexual, Hospital Pérola Byington\n\n" +
                 "E-mail: crsm-ouvidoria@saude.sp.gov.br\n" +
                 "Telefone: 3248-8000\n\n" +
                 "Endereço: Avenida Brig. Luís Antônio, 683 Bela Vista – São Paulo\n");
@@ -52,10 +52,18 @@ public class ONGInformation extends AppCompatActivity {
         TextView tituloCasaBrasilandia = (TextView)findViewById(R.id.tituloCasaBrasilandia);
         tituloCasaBrasilandia.setText("Casa Brasilândia");
         TextView casaBrasilandia = (TextView) findViewById(R.id.casaBrasilandia);
-        casaBrasilandia.setText("\nProjeto: Oferecer assistência psicossocial e jurídica à mulher em situação de violência\n" +
+        casaBrasilandia.setText("\nProjeto: Oferecer assistência psicossocial e jurídica à mulher em situação de violência\n\n" +
                 "E-mail: casabrasilandia@ig.com.br\n" +
                 "Telefone: (0xx11) 3983.4294; 3984.9816\n\n" +
                 "Endereço: R. Silvio Bueno Peruche, nº 538 – Vila Brasilândia\n");
+
+        TextView tituloCasaLilith = (TextView)findViewById(R.id.tituloCasaLilith);
+        tituloCasaLilith.setText("Casa da Mulher Lilith");
+        TextView casaLilith = (TextView)findViewById(R.id.casaLilith);
+        casaLilith.setText("\nProjeto: Prevenção da saúde e assistência jurídica às mulheres vítimas de violência\n\n" +
+                "E-mail: casalilith@uol.com.br\n" +
+                "Telefone: (11) 2917-3710\n\n" +
+                "Endereço: R. Paratiquara, 33 – ap 4, São Paulo – SP\n");
 
     }
 

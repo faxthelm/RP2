@@ -51,7 +51,7 @@
             <TextView
                 android:id="@+id/agenciaPatricia"
                 android:layout_width="298dp"
-                android:layout_height="220dp"
+                android:layout_height="224dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/border_style"
@@ -78,7 +78,7 @@
             <TextView
                 android:id="@+id/agenciaAssociacao"
                 android:layout_width="296dp"
-                android:layout_height="149dp"
+                android:layout_height="152dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/border_style"
@@ -105,7 +105,7 @@
             <TextView
                 android:id="@+id/bemMeQuer"
                 android:layout_width="296dp"
-                android:layout_height="149dp"
+                android:layout_height="152dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/border_style"
@@ -132,7 +132,7 @@
             <TextView
                 android:id="@+id/casaBrasilandia"
                 android:layout_width="296dp"
-                android:layout_height="149dp"
+                android:layout_height="152dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/border_style"
@@ -142,6 +142,32 @@
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteY="119dp" />
 
+            <TextView
+                android:id="@+id/tituloCasaLilith"
+                android:layout_width="285dp"
+                android:layout_height="31dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:textAlignment="center"
+                android:textColor=" #d8781e "
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.555"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="328dp" />
+
+            <TextView
+                android:id="@+id/casaLilith"
+                android:layout_width="296dp"
+                android:layout_height="152dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/border_style"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="119dp" />
 
         </LinearLayout>
     </ScrollView>
