@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/home"
+        android:title="Pedir Ajuda" />
+
+    <item android:id="@+id/contatos"
+        android:title="Contatos">
+        <menu xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:id="@+id/oficial"
+                android:title="Contatos Oficiais" />
+            <item android:id="@+id/ong"
+                android:title="Contatos de ONGs" />
+        </menu>
+    </item>
+</menu>
