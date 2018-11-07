@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LocationManager locationManager;
     private SharedPreferences.Editor editor;
 
-    private Context mContext;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,13 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
 
-        if (ContextCompat.checkSelfPermission(this,
-                android.Manifest.permission.SEND_SMS)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.SEND_SMS},
-                    MY_PERMISSIONS_REQUEST_SEND_SMS);
-        }
+        askPermissions();
 
         Button manageEmergencyContactsButton = (Button) findViewById(R.id.manageEmergencyContacts);
         Button helpButton = (Button) findViewById(R.id.helpButton);
@@ -110,33 +102,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void sendSms() {
         getArrayList();
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.SEND_SMS)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.SEND_SMS},
-                    MY_PERMISSIONS_REQUEST_SEND_SMS);
-        }
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_FINE_LOCATION);
-        }
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_COARSE_LOCATION);
-        }
+        askPermissions();
+
         SmsManager smsManager = SmsManager.getDefault();
         try {
             Location currentGPSLocation = locationManager.getLastKnownLocation("gps");
             Location currentAGPSLocation = locationManager.getLastKnownLocation("network");
             Location currentWIFILocation = locationManager.getLastKnownLocation("passive");
             StringBuilder message = new StringBuilder("Preciso de ajuda! http://maps.google.com/maps?saddr=");
+
+            if( emergencyContactsArrayList.size() == 0){
+                Toast.makeText(getApplicationContext(), "Adicione contatos de emergência antes!", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(this, ManageEmergencyContactsActivity.class);
+                startActivity(intent);
+                return;
+            }
 
             for (Contact contact : emergencyContactsArrayList) {
                 if(currentGPSLocation != null) {
@@ -158,19 +138,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     smsManager.sendTextMessage(contact.getPhoneNumber(), null, message.toString(), null, null);
                 }
                 else {
-                    smsManager.sendTextMessage(contact.getPhoneNumber(), null, "Preciso de ajuda! Não consigo mandar minha localização!", null, null);
+                    smsManager.sendTextMessage(contact.getPhoneNumber(), null, "Preciso de ajuda! Mas Não consigo mandar minha localização!", null, null);
                 }
             }
-            if( currentAGPSLocation != null && currentGPSLocation != null && currentWIFILocation != null)
+            if( currentAGPSLocation == null && currentGPSLocation == null && currentWIFILocation == null)
                 Toast.makeText(getApplicationContext(), "SMS's enviados sem localização!", Toast.LENGTH_LONG).show();
             else
                 Toast.makeText(getApplicationContext(), "SMS's enviados!", Toast.LENGTH_LONG).show();
-        } catch (Exception e) {
+        } catch (SecurityException | IllegalArgumentException  e) {
             if (e.toString().contains(Manifest.permission.READ_PHONE_STATE) && ContextCompat
                     .checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) !=
                     PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission
                         .READ_PHONE_STATE}, MY_PERMISSIONS_REQUEST_READ_PHONE_STATE);
+            } else if
+                (e.toString().contains(Manifest.permission.ACCESS_FINE_LOCATION) && ContextCompat
+                        .checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                        PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission
+                        .ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_FINE_LOCATION);
+            }
+            else if
+                    (e.toString().contains(Manifest.permission.ACCESS_COARSE_LOCATION) && ContextCompat
+                            .checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
+                            PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission
+                        .ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_REQUEST_COARSE_LOCATION);
             }
         }
     }
@@ -230,6 +223,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void askPermissions(){
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.SEND_SMS},
+                    MY_PERMISSIONS_REQUEST_SEND_SMS);
+        }
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_FINE_LOCATION);
+        }
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_COARSE_LOCATION);
         }
     }
 }
