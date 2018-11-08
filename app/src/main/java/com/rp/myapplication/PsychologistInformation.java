@@ -16,13 +16,13 @@ public class PsychologistInformation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_psychologist_information);
 
-        TextView contatosOng = (TextView)findViewById(R.id.contatosOng);
+        TextView contatosOng = (TextView)findViewById(R.id.contatosPsico);
         contatosOng.setText(Html.fromHtml("<u>Contatos de Psicólogos - Gratuitos ou a Preços Populares</u>"));
         contatosOng.setTextSize(20f);
 
         TextView tituloUnip = (TextView)findViewById(R.id.tituloUnip);
         tituloUnip.setText("Centro de Psicologia Aplicada UNIP");
-        TextView unip = (TextView)findViewById(R.id.agenciaPatricia);
+        TextView unip = (TextView)findViewById(R.id.unip);
         unip.setText("\nDe segunda a sexta, das 8h às 21h\n" +
                 "Telefone: 3341-4250\n" +
                 "Endereço: Rua Apeninos, 595\n");
