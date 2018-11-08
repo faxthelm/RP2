@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -39,35 +40,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final int MY_PERMISSIONS_REQUEST_SEND_SMS = 3;
     private final int MY_PERMISSIONS_REQUEST_READ_PHONE_STATE = 4;
     private final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 5;
-    private final int MY_PERMISSIONS_REQUEST_COARSE_LOCATION = 6;
     private FirebaseAuth mAuth;
     private ArrayList<Contact> emergencyContactsArrayList;
     private SharedPreferences sharedPref;
     private LocationManager locationManager;
     private SharedPreferences.Editor editor;
 
+    private Location currentGPSLocation;
+    private Location currentAGPSLocation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_button);
-
         mAuth = FirebaseAuth.getInstance();
         sharedPref = this.getSharedPreferences(EMERGENCY_CONTACTS_LIST, Context.MODE_PRIVATE);
         editor = sharedPref.edit();
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        mAuth.signInAnonymously()
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = mAuth.getCurrentUser();
-                        } else {
-                        }
-                    }
-                });
+        requestLocation();
+
+        mAuth.signInAnonymously();
 
         askPermissions();
 
@@ -106,10 +100,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         SmsManager smsManager = SmsManager.getDefault();
         try {
-            Location currentGPSLocation = locationManager.getLastKnownLocation("gps");
-            Location currentAGPSLocation = locationManager.getLastKnownLocation("network");
-            Location currentWIFILocation = locationManager.getLastKnownLocation("passive");
-            StringBuilder message = new StringBuilder("Preciso de ajuda! http://maps.google.com/maps?saddr=");
+
+            StringBuilder message = new StringBuilder("Preciso de ajuda! ");
 
             if( emergencyContactsArrayList.size() == 0){
                 Toast.makeText(getApplicationContext(), "Adicione contatos de emergência antes!", Toast.LENGTH_LONG).show();
@@ -118,33 +110,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return;
             }
 
-            for (Contact contact : emergencyContactsArrayList) {
-                if(currentGPSLocation != null) {
+            if(currentGPSLocation != null && currentAGPSLocation != null) {
+                message.append("http://maps.google.com/?q=");
+                if(currentGPSLocation.getAccuracy() > currentAGPSLocation.getAccuracy()) {
                     message.append(currentGPSLocation.getLatitude());
                     message.append(",");
                     message.append(currentGPSLocation.getLongitude());
-                    smsManager.sendTextMessage(contact.getPhoneNumber(), null, message.toString(), null, null);
-                }
-                else if(currentAGPSLocation != null){
-                    message.append(currentAGPSLocation.getLatitude());
+                } else {
+                    message.append(currentGPSLocation.getLatitude());
                     message.append(",");
-                    message.append(currentAGPSLocation.getLongitude());
-                    smsManager.sendTextMessage(contact.getPhoneNumber(), null, message.toString(), null, null);
-                }
-                else if(currentWIFILocation != null){
-                    message.append(currentWIFILocation.getLatitude());
-                    message.append(",");
-                    message.append(currentWIFILocation.getLongitude());
-                    smsManager.sendTextMessage(contact.getPhoneNumber(), null, message.toString(), null, null);
-                }
-                else {
-                    smsManager.sendTextMessage(contact.getPhoneNumber(), null, "Preciso de ajuda! Mas Não consigo mandar minha localização!", null, null);
+                    message.append(currentGPSLocation.getLongitude());
                 }
             }
-            if( currentAGPSLocation == null && currentGPSLocation == null && currentWIFILocation == null)
+            else if (currentGPSLocation != null) {
+                message.append("http://maps.google.com/?q=");
+                message.append(currentGPSLocation.getLatitude());
+                message.append(",");
+                message.append(currentGPSLocation.getLongitude());
+            }
+            else if(currentAGPSLocation != null) {
+                message.append("http://maps.google.com/?q=");
+                message.append(currentAGPSLocation.getLatitude());
+                message.append(",");
+                message.append(currentAGPSLocation.getLongitude());
+            } else {
+                message.append("Mas Não consigo mandar minha localização!");
+            }
+
+            for (Contact contact : emergencyContactsArrayList) {
+                smsManager.sendTextMessage(contact.getPhoneNumber(), null, message.toString(), null, null);
+            }
+            if( currentAGPSLocation == null && currentGPSLocation == null)
                 Toast.makeText(getApplicationContext(), "SMS's enviados sem localização!", Toast.LENGTH_LONG).show();
-            else
+            else {
                 Toast.makeText(getApplicationContext(), "SMS's enviados!", Toast.LENGTH_LONG).show();
+            }
         } catch (SecurityException | IllegalArgumentException  e) {
             if (e.toString().contains(Manifest.permission.READ_PHONE_STATE) && ContextCompat
                     .checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) !=
@@ -158,14 +158,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission
                         .ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_FINE_LOCATION);
             }
-            else if
-                    (e.toString().contains(Manifest.permission.ACCESS_COARSE_LOCATION) && ContextCompat
-                            .checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
-                            PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission
-                        .ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_REQUEST_COARSE_LOCATION);
-            }
         }
+        stopRequestingLocation();
     }
 
     @Override
@@ -177,15 +171,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Habilite a permissão de SMS para o aplicativo nas configurações do celular.", Toast.LENGTH_LONG).show();
-                    return;
-                }
-            }
-            case MY_PERMISSIONS_REQUEST_COARSE_LOCATION: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                } else {
-                    Toast.makeText(getApplicationContext(),
-                            "Habilite a permissão de Localização para o aplicativo nas configurações do celular.", Toast.LENGTH_LONG).show();
                     return;
                 }
             }
@@ -241,12 +226,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_FINE_LOCATION);
         }
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_COARSE_LOCATION);
-        }
     }
+
+    private void requestLocation() throws SecurityException{
+        locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER, 0, 0, gpsListener);
+        locationManager.requestLocationUpdates(
+                LocationManager.NETWORK_PROVIDER, 0, 0, gpsListener);
+    }
+
+    private void stopRequestingLocation(){
+        locationManager.removeUpdates(gpsListener);
+    }
+
+    private LocationListener gpsListener = new LocationListener()  {
+        @Override
+        public void onLocationChanged(Location location) throws SecurityException {
+            currentGPSLocation = locationManager.getLastKnownLocation("gps");
+            currentAGPSLocation = locationManager.getLastKnownLocation("network");
+        }
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {        }
+
+        @Override
+        public void onProviderEnabled(String provider) {        }
+
+        @Override
+        public void onProviderDisabled(String provider) {        }
+    };
+
 }
