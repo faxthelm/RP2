@@ -50,8 +50,8 @@
 
             <TextView
                 android:id="@+id/unip"
-                android:layout_width="298dp"
-                android:layout_height="224dp"
+                android:layout_width="288dp"
+                android:layout_height="132dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/border_style"
@@ -77,8 +77,8 @@
 
             <TextView
                 android:id="@+id/mack"
-                android:layout_width="298dp"
-                android:layout_height="224dp"
+                android:layout_width="288dp"
+                android:layout_height="132dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/border_style"
@@ -104,8 +104,8 @@
 
             <TextView
                 android:id="@+id/unib"
-                android:layout_width="298dp"
-                android:layout_height="224dp"
+                android:layout_width="288dp"
+                android:layout_height="132dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/border_style"
@@ -131,8 +131,8 @@
 
             <TextView
                 android:id="@+id/sap"
-                android:layout_width="298dp"
-                android:layout_height="224dp"
+                android:layout_width="288dp"
+                android:layout_height="132dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/border_style"
@@ -158,8 +158,8 @@
 
             <TextView
                 android:id="@+id/uniban"
-                android:layout_width="298dp"
-                android:layout_height="224dp"
+                android:layout_width="288dp"
+                android:layout_height="132dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/border_style"
@@ -175,7 +175,7 @@
                 android:layout_height="31dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:textAlignment="center"
-                android:textColor=" #d8781e "
+                android:textColor=" #31af31 "
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.555"
@@ -185,8 +185,8 @@
 
             <TextView
                 android:id="@+id/fmu"
-                android:layout_width="298dp"
-                android:layout_height="224dp"
+                android:layout_width="288dp"
+                android:layout_height="132dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/border_style"
@@ -202,7 +202,7 @@
                 android:layout_height="31dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:textAlignment="center"
-                android:textColor=" #d8781e "
+                android:textColor=" #31af31"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.555"
@@ -212,8 +212,8 @@
 
             <TextView
                 android:id="@+id/pan"
-                android:layout_width="298dp"
-                android:layout_height="224dp"
+                android:layout_width="288dp"
+                android:layout_height="132dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/border_style"
@@ -229,7 +229,7 @@
                 android:layout_height="31dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:textAlignment="center"
-                android:textColor=" #d8781e "
+                android:textColor=" #31af31 "
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.555"
@@ -239,8 +239,8 @@
 
             <TextView
                 android:id="@+id/propisc"
-                android:layout_width="298dp"
-                android:layout_height="224dp"
+                android:layout_width="288dp"
+                android:layout_height="132dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/border_style"
@@ -256,7 +256,7 @@
                 android:layout_height="31dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:textAlignment="center"
-                android:textColor=" #d8781e "
+                android:textColor=" #31af31 "
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.555"
@@ -266,8 +266,8 @@
 
             <TextView
                 android:id="@+id/usp"
-                android:layout_width="298dp"
-                android:layout_height="224dp"
+                android:layout_width="288dp"
+                android:layout_height="132dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/border_style"

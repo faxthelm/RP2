@@ -17,7 +17,7 @@ public class PsychologistInformation extends AppCompatActivity {
         setContentView(R.layout.activity_psychologist_information);
 
         TextView contatosOng = (TextView)findViewById(R.id.contatosPsico);
-        contatosOng.setText(Html.fromHtml("<u>Contatos de Psicólogos - Gratuitos ou a Preços Populares</u>"));
+        contatosOng.setText(Html.fromHtml("<u>Contatos de Psicólogos Gratuitos ou a Preços Populares</u>"));
         contatosOng.setTextSize(20f);
 
         TextView tituloUnip = (TextView)findViewById(R.id.tituloUnip);
