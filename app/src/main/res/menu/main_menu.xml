@@ -10,6 +10,8 @@
                 android:title="Contatos Oficiais" />
             <item android:id="@+id/ong"
                 android:title="Contatos de ONGs" />
+            <item android:id="@+id/psychologist"
+                android:title="Contatos de Institutos Psicológicos" />
         </menu>
     </item>
 </menu>

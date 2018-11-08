@@ -20,6 +20,7 @@ public class OficialInformation extends AppCompatActivity {
 
         TextView contatosOficiais = findViewById(R.id.contatosOficiais);
         contatosOficiais.setText(Html.fromHtml("<u>Contatos Oficiais</u>"));
+        contatosOficiais.setTextSize(20f);
 
         TextView centralAtendimento = findViewById(R.id.centralAtendimento);
         centralAtendimento.setText("Central de Atendimento à Mulher");
@@ -56,6 +57,10 @@ public class OficialInformation extends AppCompatActivity {
             case R.id.ong:
                 Intent intent2 = new Intent(this, ONGInformation.class);
                 startActivity(intent2);
+                return true;
+            case R.id.psychologist:
+                Intent intent3 = new Intent(this, PsychologistInformation.class);
+                startActivity(intent3);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

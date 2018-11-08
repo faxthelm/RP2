@@ -206,6 +206,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(this, ONGInformation.class);
                 startActivity(intent);
                 return true;
+            case R.id.psychologist:
+                Intent intent3 = new Intent(this, PsychologistInformation.class);
+                startActivity(intent3);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

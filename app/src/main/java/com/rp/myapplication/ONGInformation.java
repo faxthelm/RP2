@@ -87,6 +87,10 @@ public class ONGInformation extends AppCompatActivity {
                 return true;
             case R.id.ong:
                 return true;
+            case R.id.psychologist:
+                Intent intent3 = new Intent(this, PsychologistInformation.class);
+                startActivity(intent3);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
