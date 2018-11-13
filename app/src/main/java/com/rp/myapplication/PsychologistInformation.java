@@ -110,6 +110,10 @@ public class PsychologistInformation extends AppCompatActivity {
                 return true;
             case R.id.psychologist:
                 return true;
+            case R.id.violence:
+                Intent intent4 = new Intent(this, ViolenceTypes.class);
+                startActivity(intent4);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -14,4 +14,7 @@
                 android:title="Contatos de Institutos Psicológicos" />
         </menu>
     </item>
+    <item android:id="@+id/violence"
+           android:title="Tipos de Violência">
+    </item>
 </menu>
