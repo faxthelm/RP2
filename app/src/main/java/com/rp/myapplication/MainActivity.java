@@ -56,14 +56,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAuth = FirebaseAuth.getInstance();
         sharedPref = this.getSharedPreferences(EMERGENCY_CONTACTS_LIST, Context.MODE_PRIVATE);
         editor = sharedPref.edit();
+        askPermissions();
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        try {
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        requestLocation();
+            requestLocation();
+        } catch (SecurityException e) {
+            if
+                    (e.toString().contains(Manifest.permission.ACCESS_FINE_LOCATION) && ContextCompat
+                    .checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                    PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission
+                        .ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_FINE_LOCATION);
+            }
+        }
 
         mAuth.signInAnonymously();
-
-        askPermissions();
 
         Button manageEmergencyContactsButton = (Button) findViewById(R.id.manageEmergencyContacts);
         Button helpButton = (Button) findViewById(R.id.helpButton);
