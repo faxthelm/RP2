@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sharedPref = this.getSharedPreferences(EMERGENCY_CONTACTS_LIST, Context.MODE_PRIVATE);
         editor = sharedPref.edit();
 
+        askPermissions();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         requestLocation();
