@@ -4,16 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HelpButtonActivity">
+    tools:context=".MainActivity">
 
     <Button
         android:id="@+id/helpButton"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="240dp"
         android:layout_height="234dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
+        android:background="@drawable/help_button"
+        android:fontFamily="@font/roboto_slab"
         android:text="Pedir Ajuda"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/manageEmergencyContacts"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
