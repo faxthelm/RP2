@@ -110,7 +110,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SmsManager smsManager = SmsManager.getDefault();
         try {
 
-            StringBuilder message = new StringBuilder("Preciso de ajuda! ");
+            StringBuilder message = new StringBuilder("Preciso de ajuda! Estou me sentindo insegura ");
+            currentGPSLocation = locationManager.getLastKnownLocation("gps");
+            currentAGPSLocation = locationManager.getLastKnownLocation("network");
 
             if( emergencyContactsArrayList.size() == 0){
                 Toast.makeText(getApplicationContext(), "Adicione contatos de emergência antes!", Toast.LENGTH_LONG).show();
@@ -168,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_FINE_LOCATION);
             }
         }
-        stopRequestingLocation();
+        //stopRequestingLocation();
     }
 
     @Override
