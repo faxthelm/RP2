@@ -150,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             for (Contact contact : emergencyContactsArrayList) {
                 smsManager.sendTextMessage(contact.getPhoneNumber(), null, message.toString(), null, null);
+                //wait
             }
             if( currentAGPSLocation == null && currentGPSLocation == null)
                 Toast.makeText(getApplicationContext(), "SMS's enviados sem localização!", Toast.LENGTH_LONG).show();
