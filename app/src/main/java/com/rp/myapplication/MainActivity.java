@@ -2,6 +2,7 @@ package com.rp.myapplication;
 
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -107,10 +108,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getArrayList();
         askPermissions();
 
-        SmsManager smsManager = SmsManager.getDefault();
+        final SmsManager smsManager = SmsManager.getDefault();
         try {
 
-            StringBuilder message = new StringBuilder("Preciso de ajuda! Estou me sentindo insegura!");
+            final StringBuilder message = new StringBuilder("Preciso de ajuda! Estou me sentindo insegura!");
             currentGPSLocation = locationManager.getLastKnownLocation("gps");
             currentAGPSLocation = locationManager.getLastKnownLocation("network");
 
@@ -147,10 +148,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else {
                 message.append("Mas Não consigo mandar minha localização!");
             }
+            PendingIntent sentPI = PendingIntent.getBroadcast(this, 0, new Intent("SMS_SENT"), 0);
+            PendingIntent deliveredPI = PendingIntent.getBroadcast(this, 0, new Intent("SMS_DELIVERED"), 0);
 
-            for (Contact contact : emergencyContactsArrayList) {
-                smsManager.sendTextMessage(contact.getPhoneNumber(), null, message.toString(), null, null);
-                //wait
+            for (final Contact contact : emergencyContactsArrayList) {
+                smsManager.sendTextMessage(contact.getPhoneNumber(), null, message.toString(), sentPI, deliveredPI);
             }
             if( currentAGPSLocation == null && currentGPSLocation == null)
                 Toast.makeText(getApplicationContext(), "SMS's enviados sem localização!", Toast.LENGTH_LONG).show();

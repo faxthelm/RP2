@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "676147887546",
+    "firebase_url": "https://hojenao-30cd7.firebaseio.com",
+    "project_id": "hojenao-30cd7",
+    "storage_bucket": "hojenao-30cd7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:676147887546:android:8879985bf9b6380f",
+        "android_client_info": {
+          "package_name": "com.rp.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "676147887546-hdj4qkothoj9e2n4ljsp28iepjvc5n2l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rp.myapplication",
+            "certificate_hash": "78504c52cdaa18f7044adfcba4a796a76f2fcaa7"
+          }
+        },
+        {
+          "client_id": "676147887546-4c8uhq8ildann275hq6cpp4jvbr9aksq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnqL-Nnd_G621hc-jpZTaEqU3mKKYMLCI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "676147887546-4c8uhq8ildann275hq6cpp4jvbr9aksq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
