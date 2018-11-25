@@ -97,6 +97,10 @@ public class ViolenceTypes extends AppCompatActivity {
                 return true;
             case R.id.violence:
                 return true;
+            case R.id.report:
+                Intent intent5 = new Intent(this, ReportActivity.class);
+                startActivity(intent5);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

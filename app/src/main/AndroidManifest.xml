@@ -37,7 +37,8 @@
         <activity android:name=".OficialInformation" />
         <activity android:name=".ONGInformation" />
         <activity android:name=".PsychologistInformation" />
-        <activity android:name=".ViolenceTypes"></activity>
+        <activity android:name=".ViolenceTypes" />
+        <activity android:name=".ReportActivity"></activity>
     </application>
 
 </manifest>

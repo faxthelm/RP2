@@ -66,6 +66,10 @@ public class OficialInformation extends AppCompatActivity {
                 Intent intent4 = new Intent(this, ViolenceTypes.class);
                 startActivity(intent4);
                 return true;
+            case R.id.report:
+                Intent intent5 = new Intent(this, ReportActivity.class);
+                startActivity(intent5);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
