@@ -1,177 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReportActivity"
-    android:orientation="vertical">
+    tools:context=".ReportActivity">
 
-    <TextView
-        android:id="@+id/textViewTipoDenuncia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tipo de denúncia"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <Spinner
-        android:id="@+id/spinnerTipoDenuncia"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/textViewDataOcorrido"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Data do ocorrido"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <EditText
-        android:id="@+id/editTextDataOcorrido"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusable="false"/>
-
-    <TextView
-        android:id="@+id/textViewIdade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Você está entre"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <RadioGroup
-        android:id="@+id/radioGroupIdade"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <RadioButton
-            android:id="@+id/radioButtonPrimeiro"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp">
+        <TextView
+            android:id="@+id/textViewTipoDenuncia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="0 - 16" />
+            android:text="Tipo de denúncia"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <RadioButton
-            android:id="@+id/radioButtonSegundo"
+        <Spinner
+            android:id="@+id/spinnerTipoDenuncia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textViewDataOcorrido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="17 - 30" />
+            android:text="Data do ocorrido"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <RadioButton
-            android:id="@+id/radioButtonTerceiro"
+        <EditText
+            android:id="@+id/editTextDataOcorrido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"/>
+
+        <TextView
+            android:id="@+id/textViewIdade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="31 - 50" />
+            android:text="Você está entre"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <RadioButton
-            android:id="@+id/radioButtonQuarto"
+        <RadioGroup
+            android:id="@+id/radioGroupIdade"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/radioButtonPrimeiro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="0 - 16" />
+
+            <RadioButton
+                android:id="@+id/radioButtonSegundo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="17 - 30" />
+
+            <RadioButton
+                android:id="@+id/radioButtonTerceiro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="31 - 50" />
+
+            <RadioButton
+                android:id="@+id/radioButtonQuarto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="A partir de 51" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textViewLocal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="A partir de 51" />
-    </RadioGroup>
+            android:text="Local:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/textViewLocal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Local:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <EditText
-        android:id="@+id/editTextLocal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:singleLine="true" />
+        <EditText
+            android:id="@+id/editTextLocal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true" />
 
 
-    <TextView
-        android:id="@+id/textViewConhecimento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Qual o seu nivel de conhecimento do agressor:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <EditText
-        android:id="@+id/editTextConhecimento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:singleLine="true" />
-
-    <RadioGroup
-        android:id="@+id/radioGroupConhecido"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <RadioButton
-            android:id="@+id/radioButtonFamiliar"
+        <TextView
+            android:id="@+id/textViewConhecimento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="Familiar" />
+            android:text="Qual o seu nivel de conhecimento do agressor:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <RadioButton
-            android:id="@+id/radioButtonVista"
+
+        <RadioGroup
+            android:id="@+id/radioGroupConhecido"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/radioButtonFamiliar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Familiar" />
+
+            <RadioButton
+                android:id="@+id/radioButtonVista"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Familiar de vista" />
+
+            <RadioButton
+                android:id="@+id/radioButtonDesconhecido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Desconhecido" />
+        </RadioGroup>
+
+
+        <TextView
+            android:id="@+id/textViewAmbiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="Familiar de vista" />
+            android:text="Em qual ambiente se deu a agressão"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <RadioButton
-            android:id="@+id/radioButtonDesconhecido"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/radioGroupAmbiente"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="Desconhecido" />
-    </RadioGroup>
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/radioButtonPublico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Público" />
+
+            <RadioButton
+                android:id="@+id/radioButtonPrivado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Privado" />
+
+            <RadioButton
+                android:id="@+id/radioButtonDomiciliar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Domiciliar" />
 
 
-    <TextView
-        android:id="@+id/textViewAmbiente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Em qual ambiente se deu a agressão"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        </RadioGroup>
 
-    <EditText
-        android:id="@+id/editTextAmbiente"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:singleLine="true" />
+        <Button
+            android:id="@+id/reportButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="50dp"
+            android:layout_height="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="101dp"
+            android:background="@drawable/help_button"
+            android:fontFamily="@font/roboto_slab"
+            android:text="REPORTAR"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"/>
 
-    <RadioGroup
-        android:id="@+id/radioGroupAmbiente"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    </ScrollView>
 
-        <RadioButton
-            android:id="@+id/radioButtonPublico"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="Público" />
-
-        <RadioButton
-            android:id="@+id/radioButtonPrivado"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="Privado" />
-
-        <RadioButton
-            android:id="@+id/radioButtonDomiciliar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="Domiciliar" />
-
-
-    </RadioGroup>
-
-
-
-</LinearLayout>
+</RelativeLayout>
