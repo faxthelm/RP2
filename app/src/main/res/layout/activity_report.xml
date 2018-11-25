@@ -167,6 +167,20 @@
 
         </RadioGroup>
 
+        <Button
+            android:id="@+id/reportButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="50dp"
+            android:layout_height="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="101dp"
+            android:background="@drawable/help_button"
+            android:fontFamily="@font/roboto_slab"
+            android:text="REPORTAR"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"/>
+
     </ScrollView>
 
 </RelativeLayout>
