@@ -49,6 +49,8 @@ public class ReportActivity extends AppCompatActivity {
         setContentView(R.layout.activity_report);
 
         //CARREGA AS OPÇÕES DE ESTADO CIVIL
+        this.CriarComponentes();
+        this.CriarEventos();
         this.CarregaTiposViolencia();
     }
 
