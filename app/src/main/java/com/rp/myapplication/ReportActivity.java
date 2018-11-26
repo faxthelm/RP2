@@ -234,7 +234,12 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
                 RadioButton rIdade = (RadioButton) radioGroupIdade.getChildAt(idxIdade);
                 String idade = rIdade.getText().toString();
                 report.put("idade", idade);
-                report.put("local", editTextLocal.getText().toString());
+                if (editTextLocal.getText().toString() == "")
+                    report.put("local", editTextLocal.getText().toString());
+                else {
+                    Toast.makeText(getApplicationContext(), "Todos os campos precisam estar preenchidos!", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 report.put("tipo-violencia", spinnerTipoDenuncia.getSelectedItem().toString());
 
                 FirebaseFirestore.getInstance().collection("denuncia")

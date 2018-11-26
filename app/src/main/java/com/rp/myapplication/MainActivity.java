@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final SmsManager smsManager = SmsManager.getDefault();
         try {
 
-            final StringBuilder message = new StringBuilder("Preciso de ajuda! Estou me sentindo insegura!");
+            final StringBuilder message = new StringBuilder("Preciso de ajuda! Estou me sentindo insegura! ");
             currentGPSLocation = locationManager.getLastKnownLocation("gps");
             currentAGPSLocation = locationManager.getLastKnownLocation("network");
 
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 message.append(",");
                 message.append(currentAGPSLocation.getLongitude());
             } else {
-                message.append("Mas Não consigo mandar minha localização!");
+                message.append("Nao consigo mandar minha localizacao!");
             }
             PendingIntent sentPI = PendingIntent.getBroadcast(this, 0, new Intent("SMS_SENT"), 0);
             PendingIntent deliveredPI = PendingIntent.getBroadcast(this, 0, new Intent("SMS_DELIVERED"), 0);
