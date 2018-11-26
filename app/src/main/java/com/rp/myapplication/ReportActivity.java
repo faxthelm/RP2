@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.GetChars;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,6 +18,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
+import com.google.firebase.Timestamp;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,6 +28,8 @@ import com.rp.myapplication.model.TipoDenuncia;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -202,55 +206,58 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         if (v.getId() == R.id.reportButton) {
             Map<String, Object> report = new HashMap<>();
-            int radioButtonIDAmbiente = radioGroupAmbiente.getCheckedRadioButtonId();
-            View radioButtonAmbiente = radioGroupAmbiente.findViewById(radioButtonIDAmbiente);
-            int idxAmbiente = radioGroupAmbiente.indexOfChild(radioButtonAmbiente);
+            try {
+                int radioButtonIDAmbiente = radioGroupAmbiente.getCheckedRadioButtonId();
+                View radioButtonAmbiente = radioGroupAmbiente.findViewById(radioButtonIDAmbiente);
+                int idxAmbiente = radioGroupAmbiente.indexOfChild(radioButtonAmbiente);
 
-            RadioButton rAmbiente = (RadioButton) radioGroupAmbiente.getChildAt(idxAmbiente);
-            String ambiente = rAmbiente.getText().toString();
-            report.put("ambiente", ambiente);
-            report.put("data", editTextDataOcorrido.getText());
-
-
-            int radioButtonIDConhecido = radioGroupConhecido.getCheckedRadioButtonId();
-            View radioButtonConhecido = radioGroupConhecido.findViewById(radioButtonIDConhecido);
-            int idxConhecido = radioGroupConhecido.indexOfChild(radioButtonConhecido);
-
-            RadioButton rConhecido = (RadioButton) radioGroupConhecido.getChildAt(idxConhecido);
-            String conhecido = rConhecido.getText().toString();
-            report.put("familiaridade", conhecido);
+                RadioButton rAmbiente = (RadioButton) radioGroupAmbiente.getChildAt(idxAmbiente);
+                String ambiente = rAmbiente.getText().toString();
+                report.put("ambiente", ambiente);
+                Calendar calendar = new GregorianCalendar(datePickerDialogDataOcorrido.getDatePicker().getYear(), datePickerDialogDataOcorrido.getDatePicker().getMonth(), datePickerDialogDataOcorrido.getDatePicker().getDayOfMonth());
+                report.put("data", new Timestamp(calendar.getTime()));
 
 
+                int radioButtonIDConhecido = radioGroupConhecido.getCheckedRadioButtonId();
+                View radioButtonConhecido = radioGroupConhecido.findViewById(radioButtonIDConhecido);
+                int idxConhecido = radioGroupConhecido.indexOfChild(radioButtonConhecido);
 
-            int radioButtonIDIdade = radioGroupIdade.getCheckedRadioButtonId();
-            View radioButtonIdade = radioGroupIdade.findViewById(radioButtonIDIdade);
-            int idxIdade = radioGroupIdade.indexOfChild(radioButtonIdade);
-
-            RadioButton rIdade = (RadioButton) radioGroupIdade.getChildAt(idxIdade);
-            String idade = rIdade.getText().toString();
-            report.put("idade", idade);
-            report.put("local", editTextLocal.getText());
-            report.put("tipo-violencia", spinnerTipoDenuncia.getSelectedItem().toString());
-
-            db.collection("denuncia")
-                    .add(report)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            Toast.makeText(getApplicationContext(), "Denúncia cadastrada com sucesso", Toast.LENGTH_LONG).show();
-                            finish();
-                            startActivity(getIntent());
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(), "Erro ao cadastrar denúncia", Toast.LENGTH_LONG).show();
-                        }
-                    });
+                RadioButton rConhecido = (RadioButton) radioGroupConhecido.getChildAt(idxConhecido);
+                String conhecido = rConhecido.getText().toString();
+                report.put("familiaridade", conhecido);
 
 
+                int radioButtonIDIdade = radioGroupIdade.getCheckedRadioButtonId();
+                View radioButtonIdade = radioGroupIdade.findViewById(radioButtonIDIdade);
+                int idxIdade = radioGroupIdade.indexOfChild(radioButtonIdade);
 
+                RadioButton rIdade = (RadioButton) radioGroupIdade.getChildAt(idxIdade);
+                String idade = rIdade.getText().toString();
+                report.put("idade", idade);
+                report.put("local", editTextLocal.getText().toString());
+                report.put("tipo-violencia", spinnerTipoDenuncia.getSelectedItem().toString());
+
+                FirebaseFirestore.getInstance().collection("denuncia")
+                        .add(report)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Toast.makeText(getApplicationContext(), "Denúncia cadastrada com sucesso", Toast.LENGTH_LONG).show();
+                                finish();
+                                startActivity(getIntent());
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(), "Erro ao cadastrar denúncia", Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+
+            }catch (Exception e){
+                Toast.makeText(getApplicationContext(), "Todos os campos precisam estar preenchidos!", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
